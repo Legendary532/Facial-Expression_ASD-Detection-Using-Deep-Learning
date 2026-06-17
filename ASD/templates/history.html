@@ -1,0 +1,267 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Prediction Records || ASD Using Deep Learning</title>
+
+    <link rel="icon" href="{% static 'images/image.png' %}?v=2">
+    <link rel="stylesheet" href="{% static 'css/main_st.css' %}?v=5">
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+
+<body>
+
+    <!-- ================= HEADER ================= -->
+    <header>
+
+        <div class="logo">
+            <span>ASD</span> Detection
+        </div>
+
+        <div id="menu-icon" class='bx bx-menu'></div>
+
+        <ul class="navlist">
+            <li><a href="{% url 'main' %}">Back to Main</a></li>
+            <li><a href="{% url 'login' %}">Logout</a></li>
+        </ul>
+
+    </header>
+
+
+    <!-- ================= HISTORY ================= -->
+    <div id="history" class="screen" style="display:block;">
+
+        <div class="card center">
+
+            <h2 class="result-title">
+                Prediction Records
+            </h2>
+
+
+            <!-- ================= TABLE ================= -->
+            <div class="table-container">
+
+                <table style="width:100%; border-collapse: collapse;">
+
+                    <thead>
+                        <tr style="text-align:center; color:#12f7ff;">
+
+                            <th>Image</th>
+                            <th>Result</th>
+                            <th>Date</th>
+
+                        </tr>
+                    </thead>
+
+
+                    <tbody>
+
+                        {% for record in records %}
+
+                        <tr style="text-align:center; border-bottom:1px solid #444;">
+
+                            <!-- IMAGE -->
+                            <td style="padding:10px;">
+
+                                <img src="{{ record.image.url }}"
+                                     width="80"
+                                     height="80"
+                                     style="
+                                        object-fit:cover;
+                                        border-radius:12px;
+                                        border:2px solid #12f7ff;
+                                     ">
+
+                            </td>
+
+
+                            <!-- RESULT -->
+                            <td class="{% if record.final_result == 'ASD' %}asd-cell{% else %}non-asd-cell{% endif %}">
+
+                                {{ record.final_result }}
+
+                            </td>
+
+
+                            <!-- DATE -->
+                            <td>
+
+                                {{ record.created_at|date:"F d, Y, g:i a" }}
+
+                            </td>
+
+                        </tr>
+
+                        {% empty %}
+
+                        <tr>
+                            <td colspan="3" style="text-align:center; padding:20px;">
+                                No records found
+                            </td>
+                        </tr>
+
+                        {% endfor %}
+
+                    </tbody>
+
+                </table>
+
+            </div>
+
+
+            <!-- ================= CHART ================= -->
+            <div class="chart-container">
+
+                <canvas id="predictionChart"></canvas>
+
+            </div>
+
+        </div>
+
+    </div>
+
+
+    <!-- ================= FOOTER ================= -->
+    <footer>
+
+        <p>
+            Copyright &copy; 2026 by Face Expression_ASD Detection Using deep learning | All Rights Reserved.
+        </p>
+
+    </footer>
+
+
+    <!-- ================= JAVASCRIPT ================= -->
+    <script>
+
+        // ================= DATA =================
+        const records = [
+
+            {% for r in records %}
+
+            {
+                result: "{{ r.final_result }}"
+            }
+
+            {% if not forloop.last %},{% endif %}
+
+            {% endfor %}
+
+        ];
+
+
+        // ================= CHART =================
+        const ctx = document.getElementById("predictionChart");
+
+        let chart = null;
+
+
+        function renderChart(asd, nonAsd) {
+
+            if (chart) {
+                chart.destroy();
+            }
+
+            chart = new Chart(ctx, {
+
+                type: "doughnut",
+
+                data: {
+
+                    labels: ["ASD", "Non-ASD"],
+
+                    datasets: [{
+
+                        data: [asd, nonAsd],
+
+                        backgroundColor: [
+                            "#ff4d4d",
+                            "#2ecc71"
+                        ]
+
+                    }]
+                },
+
+                options: {
+
+                    responsive: true,
+
+                    maintainAspectRatio: false,
+
+                }
+
+            });
+
+        }
+
+
+        // ================= INITIAL CHART =================
+        let asdCount = records.filter(
+            r => r.result === "ASD"
+        ).length;
+
+
+        let nonAsdCount = records.filter(
+            r => r.result !== "ASD"
+        ).length;
+
+
+        renderChart(asdCount, nonAsdCount);
+
+
+        // ================= MOBILE MENU =================
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const menuIcon = document.querySelector("#menu-icon");
+
+            const navlist = document.querySelector(".navlist");
+
+
+            if (menuIcon && navlist) {
+
+                menuIcon.addEventListener("click", () => {
+
+                    menuIcon.classList.toggle("bx-x");
+
+                    navlist.classList.toggle("active");
+
+                });
+
+
+                window.addEventListener("scroll", () => {
+
+                    navlist.classList.remove("active");
+
+                    menuIcon.classList.remove("bx-x");
+
+                });
+
+
+                document.querySelectorAll(".navlist a").forEach(link => {
+
+                    link.addEventListener("click", () => {
+
+                        navlist.classList.remove("active");
+
+                        menuIcon.classList.remove("bx-x");
+
+                    });
+
+                });
+
+            }
+
+        });
+
+    </script>
+
+</body>
+
+</html>

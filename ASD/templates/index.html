@@ -1,0 +1,329 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About System || ASD Using Deep Learning</title>
+    <link rel="icon" href="{% static 'images/image.png' %}?v=2">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}?v=6">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <script src="https://unpkg.com/typed.js@2.1.0/dist/typed.umd.js"></script>
+</head>
+
+<body>
+    <header>
+        <div class="logo"><span>ASD</span> Detection System</div>
+        <div id="menu-icon" class='bx bx-menu'></div>
+        <ul class="navlist">
+            <li><a href="#home" style="--i:1;">Home</a></li>
+            <li><a href="#about" style="--i:2;">About</a></li>
+            <li><a href="#services" style="--i:3;">Models</a></li>
+            <li><a href="#skills" style="--i:4;">Technical Expertise</a></li>
+            <li><a href="#contact" style="--i:5;">Contact</a></li>
+        </ul>
+    </header>
+
+    <section id="home" class="home">
+        <div class="home-content scroll-scale">
+            <h1>Welcome Portal</h1>
+            <div class="change-text">
+                <p>System Claiming: <span id="element"></span></p>
+            </div>
+            <div class="info-box">
+                <div class="email-info">
+                    <h5>Dataset Used:</h5>
+                    <span>Labeled Images</span><br>
+                    <span>Model Training</span><br>
+                    <span>Accuracy Improvement</span><br>
+                </div>
+            </div><br>
+            <div class="btn-box">
+                <a href="{% url 'main' %}" class="btn">Detection</a>
+                <a href="{% url 'login' %}" class="btn">Login</a>
+            </div>
+
+            <div class="social-icons">
+                <a href="https://www.bing.com/ck/a?!&&p=91be26ca496c40592b70a7a45a35e3d9d88815061c178afdeae8815343271114JmltdHM9MTczOTA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=1a5a8bfd-bd83-6cf0-275a-9e7ebce36d3f&psq=facebook+link&u=a1aHR0cHM6Ly93d3cuZmFjZWJvb2suY29tL2hlbHAvNjY4OTY5NTI5ODY2MzI4Lw&ntb=1"
+                    target="_blank"><i class='bx bxl-facebook'></i></a>
+                <a href="https://www.bing.com/ck/a?!&&p=dfefeb00e702b2e467464ea1bd4cb9a78d8012e733426258e3b64f2ca5792d6eJmltdHM9MTczOTA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=1a5a8bfd-bd83-6cf0-275a-9e7ebce36d3f&psq=instagram+link&u=a1aHR0cHM6Ly93d3cuaW5zdGFncmFtLmNvbS8_aGw9ZW4&ntb=1"
+                    target="_blank"><i class='bx bxl-instagram'></i></a>
+                <a href="https://www.bing.com/ck/a?!&&p=5dee2035237b22e503e5765fc915beaddaee15f215f4073910e5dc680f50e47dJmltdHM9MTczOTA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=1a5a8bfd-bd83-6cf0-275a-9e7ebce36d3f&psq=tiktok+link&u=a1aHR0cHM6Ly93d3cudGlrdG9rLmNvbS9lbi8&ntb=1"
+                    target="_blank"><i class='bx bxl-tiktok'></i></a>
+                <a href="https://www.bing.com/ck/a?!&&p=5d067ea88d206fe0770401341928b83de3272e96361f7fd7247829802d46184fJmltdHM9MTczOTA1OTIwMA&ptn=3&ver=2&hsh=4&fclid=1a5a8bfd-bd83-6cf0-275a-9e7ebce36d3f&psq=youtube+link&u=a1aHR0cHM6Ly93d3cueW91dHViZS5jb20v&ntb=1"
+                    target="_blank"><i class='bx bxl-youtube'></i></a>
+            </div>
+        </div>
+        <div class="home-image scroll-scale">
+            <div class="img-box">
+                <img src="{% static 'images/woman1.png' %}">
+            </div>
+            <div class="liquid-shape">
+                <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    width="100%" id="blobSvg">
+                    <path fill="#12f7ff">
+                        <animate attributeName="d" dur="10000ms" repeatCount="indefinite" values="
+                        M396,286.5Q377,323,375,393Q373,463,311.5,430Q250,397,203.5,404.5Q157,412,135,370.5Q113,329,70,289.5Q27,250,59.5,204.5Q92,159,135,142.5Q178,126,214,77.5Q250,29,310.5,34.5Q371,40,381.5,104Q392,168,403.5,209Q415,250,396,286.5Z;
+                        M417,298.5Q417,347,377.5,374.5Q338,402,294,404Q250,406,205.5,405.5Q161,405,129,371.5Q97,338,53.5,294Q10,250,66,213Q122,176,150,150.5Q178,125,214,87Q250,49,282,94Q314,139,370,143.5Q426,148,421.5,199Q417,250,417,298.5Z;
+                        M390.5,282Q362,314,359.5,374.5Q357,435,303.5,422.5Q250,410,213.5,393Q177,376,115,370Q53,364,62,307Q71,250,98.5,214Q126,178,151.5,151Q177,124,213.5,107Q250,90,291,99Q332,108,359,140Q386,172,402.5,211Q419,250,390.5,282Z;
+                        M408,295.5Q407,341,365,358.5Q323,376,286.5,410.5Q250,445,210.5,415.5Q171,386,152,351.5Q133,317,105.5,283.5Q78,250,76,199Q74,148,125.5,135.5Q177,123,213.5,121.5Q250,120,296,105Q342,90,352,137.5Q362,185,385.5,217.5Q409,250,408,295.5Z;
+                        M420,298.5Q418,347,378,374.5Q338,402,294,422Q250,442,210.5,414.5Q171,387,114,374Q57,361,49.5,305.5Q42,250,53.5,196.5Q65,143,112,117.5Q159,92,204.5,86Q250,80,294.5,87.5Q339,95,389.5,117.5Q440,140,431,195Q422,250,420,298.5Z;             
+                        M419.5,307.5Q449,365,411,414Q373,463,311.5,428Q250,393,205,399.5Q160,406,107,384.5Q54,363,81.5,306.5Q109,250,116,213.5Q123,177,142,136.5Q161,96,205.5,78Q250,60,305,59.5Q360,59,411.5,93Q463,127,426.5,188.5Q390,250,419.5,307.5Z;
+                        M413.5,290.5Q389,331,370.5,379Q352,427,301,420Q250,413,191,433.5Q132,454,90,410.5Q48,367,26,308.5Q4,250,38,198.5Q72,147,122,131Q172,115,211,69Q250,23,308,35.5Q366,48,393,100Q420,152,429,201Q438,250,413.5,290.5Z;
+                        M396,286.5Q377,323,375,393Q373,463,311.5,430Q250,397,203.5,404.5Q157,412,135,370.5Q113,329,70,289.5Q27,250,59.5,204.5Q92,159,135,142.5Q178,126,214,77.5Q250,29,310.5,34.5Q371,40,381.5,104Q392,168,403.5,209Q415,250,396,286.5Z;
+                        "></animate>
+                    </path>
+                </svg>
+
+            </div>
+
+            <div class="liquid-shape">
+                <svg viewBox="0 0 500 500" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink"
+                    width="100%" id="blobSvg">
+                    <path fill="#12f7ff">
+                        <animate attributeName="d" dur="10000ms" repeatCount="indefinite" values="
+                        M396,286.5Q377,323,375,393Q373,463,311.5,430Q250,397,203.5,404.5Q157,412,135,370.5Q113,329,70,289.5Q27,250,59.5,204.5Q92,159,135,142.5Q178,126,214,77.5Q250,29,310.5,34.5Q371,40,381.5,104Q392,168,403.5,209Q415,250,396,286.5Z;
+                        M417,298.5Q417,347,377.5,374.5Q338,402,294,404Q250,406,205.5,405.5Q161,405,129,371.5Q97,338,53.5,294Q10,250,66,213Q122,176,150,150.5Q178,125,214,87Q250,49,282,94Q314,139,370,143.5Q426,148,421.5,199Q417,250,417,298.5Z;
+                        M390.5,282Q362,314,359.5,374.5Q357,435,303.5,422.5Q250,410,213.5,393Q177,376,115,370Q53,364,62,307Q71,250,98.5,214Q126,178,151.5,151Q177,124,213.5,107Q250,90,291,99Q332,108,359,140Q386,172,402.5,211Q419,250,390.5,282Z;
+                        M408,295.5Q407,341,365,358.5Q323,376,286.5,410.5Q250,445,210.5,415.5Q171,386,152,351.5Q133,317,105.5,283.5Q78,250,76,199Q74,148,125.5,135.5Q177,123,213.5,121.5Q250,120,296,105Q342,90,352,137.5Q362,185,385.5,217.5Q409,250,408,295.5Z;
+                        M420,298.5Q418,347,378,374.5Q338,402,294,422Q250,442,210.5,414.5Q171,387,114,374Q57,361,49.5,305.5Q42,250,53.5,196.5Q65,143,112,117.5Q159,92,204.5,86Q250,80,294.5,87.5Q339,95,389.5,117.5Q440,140,431,195Q422,250,420,298.5Z;             
+                        M419.5,307.5Q449,365,411,414Q373,463,311.5,428Q250,393,205,399.5Q160,406,107,384.5Q54,363,81.5,306.5Q109,250,116,213.5Q123,177,142,136.5Q161,96,205.5,78Q250,60,305,59.5Q360,59,411.5,93Q463,127,426.5,188.5Q390,250,419.5,307.5Z;
+                        M413.5,290.5Q389,331,370.5,379Q352,427,301,420Q250,413,191,433.5Q132,454,90,410.5Q48,367,26,308.5Q4,250,38,198.5Q72,147,122,131Q172,115,211,69Q250,23,308,35.5Q366,48,393,100Q420,152,429,201Q438,250,413.5,290.5Z;
+                        M396,286.5Q377,323,375,393Q373,463,311.5,430Q250,397,203.5,404.5Q157,412,135,370.5Q113,329,70,289.5Q27,250,59.5,204.5Q92,159,135,142.5Q178,126,214,77.5Q250,29,310.5,34.5Q371,40,381.5,104Q392,168,403.5,209Q415,250,396,286.5Z;
+                        "></animate>
+                    </path>
+                </svg>
+
+            </div>
+        </div>
+    </section>
+
+    <!--About Section-->
+    <section id="about" class="about">
+        <div class="about scroll-bottom">
+            <div class="img-about">
+                <img src="{% static 'images/woman.avif' %}">
+                <div class="info-about1">
+                    <span>1+</span>
+                    <p>Years of Research</p>
+                </div>
+                <div class="info-about2">
+                    <span>150+</span>
+                    <p>Children Screened</p>
+                </div>
+                <div class="info-about3">
+                    <span>200+</span>
+                    <p>Families Supported</p>
+                </div>
+            </div>
+            <div class="about-content scroll-scale"  style="text-align: justify; margin-left: 5%;">
+                <span>Introducing the System</span>
+                <h2>About ASD</h2>
+                <p>
+                    Welcome to the <b style="color: var(--hover--color);">ASD Detection System</b>, a state-of-the-art
+                    AI-driven platform developed to facilitate early and accurate detection of Autism Spectrum Disorder.
+                    Leveraging three advanced Deep Learning models, the system analyzes input data to deliver precise
+                    predictions for children aged 2 to 18 years. By integrating cutting-edge technology with rigorous
+                    real-world data validation, the platform ensures reliability and clinical relevance. The intuitive
+                    interface allows healthcare professionals and parents to access actionable insights seamlessly.
+                    The system is designed to support early intervention programs and personalized care plans, enabling
+                    timely decisions that can significantly impact developmental outcomes. It incorporates advanced
+                    feature extraction techniques to analyze behavioral patterns, facial expressions, and other relevant
+                    indicators. Continuous model training ensures adaptability and improved accuracy as more data is
+                    collected over time. The platform also provides comprehensive reports that can be used for
+                    follow-ups and consultations with specialists. With strict adherence to data privacy and security
+                    standards, the ASD Detection System empowers families and professionals with trustworthy,
+                    evidence-based insights, promoting informed decision-making and better healthcare outcomes.
+                </p>
+                <div class="btn-box">
+                    <a href="#skills" class="btn">Technologies</a>
+                </div>
+            </div>
+        </div>
+
+    </section>
+
+    <section id="services" class="services scroll-scale">
+        <div class="main-text scroll-scale">
+            <span>How Models Integrate</span>
+            <h2>Our Models</h2>
+        </div>
+        <div class="section-services scroll-bottom">
+            <div class="service-box">
+                <i class='bx bx-layer service-icon'></i>
+                <h3>ResNet50 Model</h3>
+                <p>ResNet50 is employed as a pre-trained model to extract features from input data and fine-tuned on the
+                    ASD dataset. Predictions are aggregated with other models to enhance accuracy.</p>
+                <div class="btn-box service-btn">
+                    <a href="https://ietresearch.onlinelibrary.wiley.com/doi/abs/10.1049/htl2.12073" class="btn"
+                        target="_blank">Read
+                        Article</a>
+                </div>
+            </div>
+
+            <div class="service-box">
+                <i class='bx bx-desktop service-icon'></i>
+                <h3>ResNet34 Model</h3>
+                <p>ResNet34 is employed as a pre-trained model to extract features from input data and fine-tuned on the
+                    ASD dataset. Predictions are aggregated with other models to enhance accuracy.</p>
+                <div class="btn-box service-btn">
+                    <a href="https://ietresearch.onlinelibrary.wiley.com/doi/abs/10.1049/htl2.12073" class="btn"
+                        target="_blank">Read
+                        Article</a>
+                </div>
+            </div>
+
+            <div class="service-box">
+                <i class='bx bx-code-alt service-icon'></i>
+                <h3>VGG19 Model</h3>
+                <p>VGG19 is employed as a pre-trained model to extract features from input data and fine-tuned on the
+                    ASD dataset. Predictions are aggregated with other models to enhance accuracy.</p>
+                <div class="btn-box service-btn">
+                    <a href="https://ietresearch.onlinelibrary.wiley.com/doi/abs/10.1049/htl2.12073" class="btn"
+                        target="_blank">Read Article</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!--Skill Section-->
+    <section id="skills" class="skills">
+        <div class="main-text scroll-scale">
+            <span>Tools & Technologies</span>
+            <h2>Technical Expertise</h2>
+        </div>
+        <div class="skill-main scroll-scale">
+            <div class="skill-left scroll-scale">
+                <h3>Technologies</h3>
+                <div class="skill-bar">
+                    <div class="info">
+                        <p>HTML5, Tailwind CSS and Modern CSS</p>
+                        <p>90%</p>
+                    </div>
+                    <div class="bar">
+                        <span class="css"></span>
+                    </div>
+                </div>
+
+                <div class="skill-bar">
+                    <div class="info">
+                        <p>DOM and JQuery</p>
+                        <p>80%</p>
+                    </div>
+                    <div class="bar">
+                        <span class="javascript"></span>
+                    </div>
+                </div>
+
+                <div class="skill-bar">
+                    <div class="info">
+                        <p>JavaScript and PHP</p>
+                        <p>80%</p>
+                    </div>
+                    <div class="bar">
+                        <span class="javascript"></span>
+                    </div>
+                </div>
+
+                <div class="skill-bar">
+                    <div class="info">
+                        <p>DJango, Python and AI</p>
+                        <p>62%</p>
+                    </div>
+                    <div class="bar">
+                        <span class="dom"></span>
+                    </div>
+                </div>
+
+                <div class="skill-bar">
+                    <div class="info">
+                        <p>MySql</p>
+                        <p>62%</p>
+                    </div>
+                    <div class="bar">
+                        <span class="dom"></span>
+                    </div>
+                </div>
+            </div>
+
+            <div class="skill-right scroll-scale">
+                <h3>Tools</h3>
+                <div class="professional">
+                    <div class="box">
+                        <div class="circle" data-dots="80" data-percent="90"></div>
+                        <div class="text">
+                            <big>90%</big>
+                            <small>VS Code</small>
+                        </div>
+                    </div>
+
+                    <div class="box">
+                        <div class="circle" data-dots="80" data-percent="80"></div>
+                        <div class="text">
+                            <big>80%</big>
+                            <small>Django</small>
+                        </div>
+                    </div>
+
+                    <div class="box">
+                        <div class="circle" data-dots="80" data-percent="70"></div>
+                        <div class="text">
+                            <big>70%</big>
+                            <small>Google Colab</small>
+                        </div>
+                    </div>
+
+                    <div class="box">
+                        <div class="circle" data-dots="80" data-percent="55"></div>
+                        <div class="text">
+                            <big>55%</big>
+                            <small>Tensor Flow</small>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact">
+        <div class="main-text scroll-scale">
+            <span>for any help</span>
+            <h2>Contact US</h2>
+        </div>
+        <form id="contactForm" action="#" class="scroll-bottom" onsubmit="return validation()">
+            <input type="text" id="name" placeholder="Your Name">
+            <input type="email" id="email" placeholder="Your Email">
+            <input type="text" id="address" placeholder="Your Address">
+            <input type="number" id="phone" placeholder="Phone Number">
+            <textarea id="message" cols="30" rows="10" placeholder="Your Message"></textarea>
+            <div class="btn-box formBtn">
+                <button type="submit" class="btn">Send Message</button>
+            </div>
+        </form>
+    </section>
+
+    <footer>
+        <p class="scroll-scale">Copyright &copy; 2026 by Face Expression_ASD Detection Using deep learning | All Rights
+            Reserved.</p>
+        <a href="#home" class="scroll-scale"><i class='bx bxs-arrow-to-top'></i></a>
+    </footer>
+
+    <script>
+        var typed = new Typed('#element', {
+            strings: [
+                'Early Detection',
+                'Smart Analysis',
+                'Quick Screening',
+                'AI Insights'
+            ],
+            typeSpeed: 50,
+            backSpeed: 25,
+            loop: true
+        });
+    </script>
+    <script src="{% static 'js/app.js' %}"></script>
+</body>
+
+</html>
