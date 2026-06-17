@@ -1,0 +1,122 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Admin Login || ASD Using Deep Learning</title>
+    <link rel="icon" href="{% static 'images/image.png' %}?v=2">
+    <link rel="stylesheet" href="{% static 'css/main_st.css' %}?v=5">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <style>
+        body {
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .main-container {
+            flex: 1;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        form {
+            width: 100%;
+        }
+
+        h2 {
+            text-align: center;
+        }
+
+        .btn-box {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <!-- HEADER -->
+    <header>
+        <div class="logo"><span>ASD</span> Detection</div>
+        <div id="menu-icon" class='bx bx-menu'></div>
+        <ul class="navlist">
+            <li><a href="{% url 'index' %}">About System</a></li>
+            <li><a href="{% url 'main' %}">Back to Main</a></li>
+        </ul>
+    </header>
+
+    <div class="main-container">
+        <div class="card center">
+            <h2 class="result-title">Login to ASD Detection System</h2>
+            <form method="post" autocomplete="off">
+                {% csrf_token %}
+                <!-- ERROR MESSAGE -->
+                {% if form.errors %}
+                <div style="color:red; text-align:center;">
+                    {{ form.non_field_errors }}
+                </div>
+                {% endif %}
+
+                <label>Username:</label><br>
+                <input type="text" name="username" required autocomplete="new-username">
+
+                <label>Password:</label><br>
+                <input type="password" name="password" required autocomplete="new-password">
+
+                <!-- IMPORTANT -->
+                <input type="hidden" name="next" value="/history/">
+
+                <div class="btn-box">
+                    <button class="btn" type="submit">Login</button>
+                </div>
+            </form>
+
+        </div>
+    </div>
+
+    <!-- FOOTER -->
+    <footer>
+        <p>
+            Copyright &copy; 2026 by Face Expression_ASD Detection Using deep learning | All Rights Reserved.
+        </p>
+    </footer>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+
+            const menuIcon = document.querySelector("#menu-icon");
+            const navlist = document.querySelector(".navlist");
+
+            if (menuIcon && navlist) {
+
+                menuIcon.addEventListener("click", () => {
+                    menuIcon.classList.toggle("bx-x");
+                    navlist.classList.toggle("active"); // ⭐ SAME AS CSS
+                });
+
+                window.addEventListener("scroll", () => {
+                    navlist.classList.remove("active");
+                    menuIcon.classList.remove("bx-x");
+                });
+
+                document.querySelectorAll(".navlist a").forEach(link => {
+                    link.addEventListener("click", () => {
+                        navlist.classList.remove("active");
+                        menuIcon.classList.remove("bx-x");
+                    });
+                });
+            }
+        });
+    </script>
+
+</body>
+
+</html>
