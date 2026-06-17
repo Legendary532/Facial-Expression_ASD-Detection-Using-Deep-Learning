@@ -1,0 +1,303 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>User Prediction || ASD Using Deep Learning</title>
+    <link rel="icon" href="{% static 'images/image.png' %}?v=2">
+    <link rel="stylesheet" href="{% static 'css/main_st.css' %}?v=5">
+    <link href="https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css" rel="stylesheet">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+
+<body>
+    <header id="header">
+        <div class="logo"><span>ASD</span> Detection System</div>
+        <div id="menu-icon" class='bx bx-menu'></div>
+        <ul class="navlist">
+            <li><a href="{% url 'index' %}" style="--i:1;">About System</a></li>
+            <li><a href="{% url 'login' %}" style="--i:2;">Login</a></li>
+        </ul>
+    </header>
+
+    <!-- HOME SCREEN -->
+    <div id="home" class="screen active">
+        <div class="card center">
+            <h1>ASD Detection</h1>
+            <p>Deep Learning based Autism Detection System</p>
+
+            <div class="btn-box">
+                <a class="btn" onclick="showScreen('input')">Start Detection</a>
+                <a class="btn" onclick="showScreen('about')">Objectives</a>
+            </div>
+
+        </div>
+
+    </div>
+
+
+
+    <!-- INPUT SCREEN -->
+    <!-- INPUT SCREEN -->
+    <div id="input" class="screen">
+        <div class="card">
+            <form method="POST" action="{% url 'predict' %}" enctype="multipart/form-data">
+                {% csrf_token %}
+
+                <label>Please Upload Child Image</label>
+
+                <!-- FILE INPUT -->
+                <input type="file" id="imageInput" name="image" accept="image/png,image/jpeg" required>
+
+                <!-- IMAGE PREVIEW -->
+                <div class="preview-box">
+                    <img id="previewImage" src="" alt="Preview Image">
+                </div>
+
+                {% if error %}
+                <div style="color:red; text-align:center; font-weight:bold;">
+                    {{ error }}
+                </div>
+                {% endif %}
+
+                <div class="btn-box">
+                    <button class="btn" type="submit">Predict</button>
+                    <a class="btn" onclick="showScreen('home')">Back</a>
+                </div>
+            </form>
+
+            {% if uncertain %}
+
+            <div class="uncertain-box">
+
+                <div class="warning-icon">
+                    ⚠️
+                </div>
+
+                <h2>Prediction Uncertain</h2>
+
+                <p>{{ suggestion }}</p>
+
+            </div>
+
+            {% endif %}
+        </div>
+    </div>
+
+    <!-- RESULT SCREEN -->
+    <div id="resultScreen" class="screen">
+        <div class="card result-card">
+            {% if result %}
+            <div class="result-box">
+                <h2 class="result-title">ASD Detection Result</h2>
+                <div class="prediction-area">
+                    <h3>Model Predictions</h3>
+                    <p>ResNet34 : {{ model_results.resnet34 }}</p>
+                    <p>ResNet50 : {{ model_results.resnet50 }}</p>
+                    <p>VGG19 : {{ model_results.vgg19 }}</p>
+                    <h2>Final Result</h2>
+                    <div class="prediction-badge {% if result == 'ASD' %}asd{% else %}normal{% endif %}">
+                        {{ result }}
+                    </div>
+                </div>
+
+                <div class="suggestion-box">
+                    <h3>Suggestions</h3>
+                    <p>{{ suggestion }}</p>
+                </div>
+            </div>
+            {% endif %}
+            <div class="btn-box">
+                <button class="btn" onclick="downloadPDF()">Download Report</button>
+                <a class="btn" onclick="showScreen('input')">Back</a>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- ABOUT SCREEN -->
+    <div id="about" class="screen">
+        <div class="card about-card">
+            <div class="about-content">
+                <h2><b style="color: #12f7ff;">Autism Spectrum Disorder</b></h2><br>
+                <p>
+                    Autism Spectrum Disorder (ASD) is a neurodevelopmental disorder that affects an individual’s
+                    communication abilities, social interactions, and behavioral patterns. Individuals diagnosed with
+                    ASD often face difficulties in interpreting social cues, expressing emotions effectively, and
+                    adapting to changes in routine. Early detection and timely intervention play a crucial role in
+                    improving developmental outcomes and enhancing the quality of life. This system aims to support
+                    early screening by leveraging advanced deep learning techniques to assist in accurate and efficient
+                    ASD identification.
+                </p>
+            </div>
+
+            <div class="btn-box">
+                <a class="btn" onclick="showScreen('home')">Back</a>
+            </div>
+        </div>
+    </div>
+
+    <!-- DUPLICATE SCREEN -->
+    <div id="duplicateScreen" class="screen">
+        <div class="card center duplicate-card">
+            <h2 style="color:#12f7ff;">Record Already Exists</h2>
+            <p>
+                This record already exists for this child.<br>
+                Do you want to view the previous result?
+            </p>
+            <div class="btn-box">
+                {% if is_uncertain %}
+                <a class="btn" onclick="showScreen('input')">
+                    Already Exist Record
+                </a>
+                {% else %}
+                <a class="btn" onclick="showScreen('resultScreen')">
+                    Already Exist Record
+                </a>
+                {% endif %}
+                <a class="btn" onclick="showScreen('input')">No Thanks</a>
+            </div>
+        </div>
+    </div>
+
+    <footer>
+        <p>
+            Copyright &copy; 2026 by Face Expression_ASD Detection Using deep learning | All Rights
+            Reserved.
+        </p>
+    </footer>
+
+    <script src="{% static 'js/app.js' %}"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jspdf/2.5.1/jspdf.umd.min.js"></script>
+    <script>
+        document.addEventListener("DOMContentLoaded", function () {
+            const menuIcon = document.querySelector("#menu-icon");
+            const navlist = document.querySelector(".navlist");
+            if (menuIcon && navlist) {
+                menuIcon.addEventListener("click", () => {
+                    menuIcon.classList.toggle("bx-x");
+                    navlist.classList.toggle("active"); 
+                });
+
+                window.addEventListener("scroll", () => {
+                    navlist.classList.remove("active");
+                    menuIcon.classList.remove("bx-x");
+                });
+
+                document.querySelectorAll(".navlist a").forEach(link => {
+                    link.addEventListener("click", () => {
+                        navlist.classList.remove("active");
+                        menuIcon.classList.remove("bx-x");
+                    });
+                });
+            }
+
+            // ================= SCREEN CONTROLLER =================
+            function showScreen(id) {
+                document.querySelectorAll('.screen').forEach(screen => {
+                    screen.style.display = "none";
+                });
+                const target = document.getElementById(id);
+                if (target) {
+                    target.style.display = "block";
+                }
+            }
+
+            window.showScreen = showScreen;
+
+            // ================= INITIAL SCREEN LOGIC =================
+            const openScreen = new URLSearchParams(window.location.search).get("open");
+            const hasResult = "{{ result|default:'' }}";
+            const hasError = "{{ error|default:'' }}";
+            const isDuplicate = "{{ duplicate|default:'' }}";
+            const isUncertain = "{{ uncertain|default:'' }}";
+
+            if (isDuplicate !== "") {
+                showScreen("duplicateScreen");
+            }
+            else if (hasResult !== "") {
+                showScreen("resultScreen");
+            }
+            else if (hasError !== "") {
+                showScreen("input");
+            }
+            else if (isUncertain !== "") {
+                showScreen("input");
+            }
+            else if (openScreen === "input") {
+                showScreen("input");
+            }
+            else {
+                showScreen("home");
+            }
+        });
+
+        // IMAGE PREVIEW
+        const imageInput = document.getElementById("imageInput");
+        const previewImage = document.getElementById("previewImage");
+
+        if (imageInput) {
+            imageInput.addEventListener("change", function () {
+
+                const file = this.files[0];
+
+                if (file) {
+                    const reader = new FileReader();
+
+                    reader.onload = function (e) {
+                        previewImage.src = e.target.result;
+                        previewImage.style.display = "block";
+                    };
+
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
+        function downloadPDF() {
+            const { jsPDF } = window.jspdf;
+            const doc = new jsPDF({ unit: "pt", format: "a4" });
+            const pageWidth = doc.internal.pageSize.getWidth();
+            doc.setFontSize(22);
+            doc.setFont("helvetica", "bold");
+            doc.text("ASD Detection Report", pageWidth / 2, 40, { align: "center" });
+            doc.setLineWidth(0.5);
+            doc.line(40, 50, pageWidth - 40, 50);
+            let y = 80;
+            doc.setFontSize(14);
+            doc.setFont("helvetica", "normal");
+            doc.text("Model Predictions:", 40, y); y += 20;
+            doc.setFont("helvetica", "normal");
+            doc.text(`ResNet34: {{ model_results.resnet34 }}`, 60, y); y += 20;
+            doc.text(`ResNet50: {{ model_results.resnet50 }}`, 60, y); y += 20;
+            doc.text(`VGG19: {{ model_results.vgg19 }}`, 60, y); y += 30;
+            const resultText = "{{ result }}";
+            doc.setFont("helvetica", "bold");
+            doc.setFontSize(16);
+            doc.text("Final Result:", 40, y); y += 20;
+            if (resultText === "ASD") {
+                doc.setTextColor("#ff4d4d");
+            } else {
+                doc.setTextColor("#2ecc71");
+            }
+
+            doc.text(resultText, 60, y);
+            doc.setTextColor("#000000");
+            y += 30;
+            doc.setFontSize(14);
+            doc.setFont("helvetica", "bold");
+            doc.text("Suggestions:", 40, y); y += 20;
+            doc.setFont("helvetica", "normal");
+            const suggestion = `{{ suggestion|escapejs }}`;
+            const splitSuggestion = doc.splitTextToSize(suggestion, pageWidth - 80);
+            doc.text(splitSuggestion, 60, y);
+            doc.setFontSize(10);
+            doc.setTextColor("#555");
+            doc.text("Generated by ASD Detection System", pageWidth / 2, 800, { align: "center" });
+            doc.save("ASD_Report.pdf");
+        }
+    </script>
+
+</body>
+
+</html>
